@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff8d8">
+<title>Para ti 🌻</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin:0; min-height:100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #fffdf0 0%, #fff8d8 45%, #ffeeb0 100%);
+    color:#5b4300;
+    overflow:hidden;
+  }
+  .screen {
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    position:relative;
+  }
+  .card {
+    width:min(92vw, 520px);
+    text-align:center;
+    background:rgba(255,255,255,.78);
+    border:1px solid rgba(255,190,0,.25);
+    border-radius:30px;
+    padding:38px 26px;
+    box-shadow:0 20px 70px rgba(139,99,0,.18);
+    backdrop-filter:blur(12px);
+    position:relative;
+    z-index:5;
+  }
+  h1 { margin:0 0 12px; font-size:clamp(2rem,8vw,3.2rem); }
+  p { line-height:1.65; font-size:1.05rem; margin:10px 0; }
+  .small { font-size:.9rem; opacity:.72; margin-top:20px; }
+  button {
+    border:0;
+    border-radius:999px;
+    padding:15px 26px;
+    margin-top:18px;
+    background:#f4b900;
+    color:#fff;
+    font-weight:800;
+    font-size:1rem;
+    box-shadow:0 10px 25px rgba(244,185,0,.3);
+    cursor:pointer;
+    transition:.2s;
+  }
+  button:active { transform:scale(.96); }
+  .hidden { display:none; }
+  .sunflower {
+    position:absolute;
+    font-size:clamp(2.5rem,12vw,5rem);
+    opacity:0;
+    transform:translateY(60px) scale(.3) rotate(-20deg);
+    animation:grow 1.8s forwards;
+    filter:drop-shadow(0 7px 5px rgba(100,70,0,.18));
+  }
+  .s1{left:5%;bottom:5%;animation-delay:.1s}
+  .s2{left:25%;bottom:0%;animation-delay:.45s}
+  .s3{right:24%;bottom:2%;animation-delay:.8s}
+  .s4{right:4%;bottom:6%;animation-delay:1.15s}
+  @keyframes grow {
+    70%{opacity:1;transform:translateY(-5px) scale(1.08) rotate(3deg)}
+    100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+  }
+  .petal {
+    position:fixed;
+    top:-40px;
+    pointer-events:none;
+    z-index:10;
+    animation:fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform:translate3d(var(--drift),110vh,0) rotate(600deg); opacity:.1; }
+  }
+  .message {
+    animation:appear 1.3s ease both;
+  }
+  @keyframes appear {
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:none}
+  }
+  .heart { font-size:2rem; margin-top:16px; animation:pulse 1.5s infinite; }
+  @keyframes pulse { 50%{transform:scale(1.15)} }
+</style>
+</head>
+<body>
+<section class="screen" id="intro">
+  <div class="card">
+    <div style="font-size:4rem">🌻</div>
+    <h1>Tengo algo para ti...</h1>
+    <p>Pero primero tienes que abrir la sorpresa. 👀</p>
+    <button onclick="openSurprise()">Abrir sorpresa 🌻</button>
+    <div class="small">Prometo que vale la pena.</div>
+  </div>
+</section>
+
+<section class="screen hidden" id="surprise">
+  <div class="sunflower s1">🌻</div>
+  <div class="sunflower s2">🌻</div>
+  <div class="sunflower s3">🌻</div>
+  <div class="sunflower s4">🌻</div>
+
+  <div class="card message">
+    <div style="font-size:4.2rem">🌻</div>
+    <p>Dicen que los girasoles buscan el sol...</p>
+    <p><strong>pero hoy quería regalarte unos a ti,</strong><br>
+    porque últimamente tú eres uno de los motivos por los que sonrío. ❤️</p>
+    <div class="heart">❤️</div>
+    <p style="margin-top:18px"><strong>Espero que te hayan gustado, preciosa. 🌻</strong></p>
+    <p class="small">— De alguien que disfruta demasiado cuando le escribes.</p>
+  </div>
+</section>
+
+<script>
+function openSurprise(){
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('surprise').classList.remove('hidden');
+  for(let i=0;i<34;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      p.className='petal';
+      p.textContent = Math.random()>.35 ? '🌼' : '✨';
+      p.style.left=(Math.random()*100)+'vw';
+      p.style.fontSize=(12+Math.random()*18)+'px';
+      p.style.setProperty('--drift',(-100+Math.random()*200)+'px');
+      p.style.animationDuration=(4+Math.random()*5)+'s';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),10000);
+    }, i*130);
+  }
+}
+</script>
+</body>
+</html>
